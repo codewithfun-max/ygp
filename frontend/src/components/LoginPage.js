@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaGoogle, FaLinkedin, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+
 import { jwtDecode } from "jwt-decode";
 import "./style.css";
 
@@ -19,7 +19,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
   });
 
   const navigate = useNavigate();
-
+/*
   useEffect(() => {
     const getCsrfToken = async () => {
       const response = await fetch('http://127.0.0.1:8000/api/users/csrf-token/', {
@@ -113,17 +113,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
     }
   };
 
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      const decoded = jwtDecode(tokenResponse.credential);
-      console.log("User Info:", decoded);
-      localStorage.setItem("user", JSON.stringify(decoded));
-      navigate("/dashboard");
-    },
-    onError: (error) => {
-      console.error("Login Failed:", error);
-    },
-  });
+*/
 
   return (
     <div className="auth-container">
@@ -139,7 +129,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
           {isForgotPassword ? "Reset Password" : isSignup ? "Sign Up" : "Login"}
         </h2>
 
-        <button className="auth-google-btn" onClick={login}>
+        <button className="auth-google-btn" >
           <FaGoogle /> {isSignup ? "Sign up" : "Sign in"} with Google
         </button>
         <button className="auth-linkedin-btn">
@@ -150,13 +140,13 @@ const LoginPage = ({ setIsAuthenticated }) => {
 
         {/* Reset Password Form */}
         {isForgotPassword ? (
-          <form onSubmit={handleForgotPassword}>
+          <form>
             <input
               type="email"
               name="email"
               placeholder="Enter your email"
               value={formData.email}
-              onChange={handleChange}
+             
               required
               className="auth-input"
             />
@@ -173,13 +163,13 @@ const LoginPage = ({ setIsAuthenticated }) => {
             </p>
           </form>
         ) : (
-          <form onSubmit={isSignup ? handleSignup : handleLogin}>
+          <form >
             <input
               type="email"
               name="email"
               placeholder="Email"
               value={formData.email}
-              onChange={handleChange}
+              
               required
               className="auth-input"
             />
@@ -190,7 +180,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
                 name="password"
                 placeholder="Password"
                 value={formData.password}
-                onChange={handleChange}
+              
                 required
                 className="input-field"
               />
@@ -206,7 +196,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
                   name="confirmPassword"
                   placeholder="Confirm Password"
                   value={formData.confirmPassword}
-                  onChange={handleChange}
+                  
                   required
                   className="input-field"
                 />
